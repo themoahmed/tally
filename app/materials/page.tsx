@@ -51,8 +51,8 @@ import { Package, AlertTriangle, DollarSign, ShoppingCart, Pencil, Trash2, Plus,
 
 // Mock data for demonstration
 const mockMaterials = [
-  { id: 1, name: 'Cotton Fabric', category: 'Fabric', quantity: 500, unit: 'yards', buyingPrice: 5, threshold: 100, supplier: 'Fabric Co', buyLink: 'https://fabricco.com', status: 'In-stock', image: null },
-  { id: 2, name: 'Buttons', category: 'Accessories', quantity: 1000, unit: 'pcs', buyingPrice: 0.1, threshold: 200, supplier: 'Button World', buyLink: 'https://buttonworld.com', status: 'Low stock', image: null },
+  { id: 1, name: 'Gildan H000 Black S', category: 'T-Shirt', quantity: 25, unit: 'pcs', buyingPrice: 5, threshold: 20, supplier: 'Alphabroder', buyLink: 'https://www.alphabroder.com/product/h000/gildan-hammer-adult-t-shirt.html?color=51', status: 'In-stock', image: '/images/GildanHammerBlack.png' },
+  { id: 2, name: 'Gildan H000 Black M', category: 'T-Shirt', quantity: 15, unit: 'pcs', buyingPrice: 5, threshold: 20, supplier: 'Alphabroder', buyLink: 'https://www.alphabroder.com/product/h000/gildan-hammer-adult-t-shirt.html?color=51', status: 'In-stock', image: '/images/GildanHammerBlack.png' },{ id: 3, name: 'Gildan H000 Black L', category: 'T-Shirt', quantity: 10, unit: 'pcs', buyingPrice: 5, threshold: 20, supplier: 'Alphabroder', buyLink: 'https://www.alphabroder.com/product/h000/gildan-hammer-adult-t-shirt.html?color=51', status: 'In-stock', image: '/images/GildanHammerBlack.png' }
 ]
 
 export default function InventoryPage() {
@@ -60,15 +60,21 @@ export default function InventoryPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [editingMaterial, setEditingMaterial] = useState(null)
-  const [categories, setCategories] = useState(['Fabric', 'Accessories', 'Thread'])
+  const [categories, setCategories] = useState(['T-Shirt', 'Crewneck', 'Hoodie'])
   const [newCategory, setNewCategory] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [units, setUnits] = useState(['pcs'])
+  const [newUnit, setNewUnit] = useState('')
+  const [selectedUnit, setSelectedUnit] = useState('pcs')
+  const [suppliers, setSuppliers] = useState([])
+  const [newSupplier, setNewSupplier] = useState('')
+  const [selectedSupplier, setSelectedSupplier] = useState('')
   const [selectedImage, setSelectedImage] = useState(null)
   const fileInputRef = useRef(null)
 
   const addMaterial = (newMaterial) => {
     setMaterials([...materials, { 
-      ...newMaterial, 
+      ...newMaterial,
       id: materials.length + 1,
       buyingPrice: Number(newMaterial.buyingPrice),
       quantity: Number(newMaterial.quantity),
@@ -79,8 +85,18 @@ export default function InventoryPage() {
     if (newCategory && !categories.includes(newCategory)) {
       setCategories([...categories, newCategory])
     }
+    if (newUnit && !units.includes(newUnit)) {
+      setUnits([...units, newUnit])
+    }
+    if (newSupplier && !suppliers.includes(newSupplier)) {
+      setSuppliers([...suppliers, newSupplier])
+    }
     setNewCategory('')
     setSelectedCategory('')
+    setNewUnit('')
+    setSelectedUnit('pcs')
+    setNewSupplier('')
+    setSelectedSupplier('')
     setSelectedImage(null)
   }
 
@@ -102,6 +118,24 @@ export default function InventoryPage() {
     } else {
       setSelectedCategory(value)
       setNewCategory('')
+    }
+  }
+
+  const handleUnitChange = (value) => {
+    if (value === 'new') {
+      setSelectedUnit('new')
+    } else {
+      setSelectedUnit(value)
+      setNewUnit('')
+    }
+  }
+
+  const handleSupplierChange = (value) => {
+    if (value === 'new') {
+      setSelectedSupplier('new')
+    } else {
+      setSelectedSupplier(value)
+      setNewSupplier('')
     }
   }
 
@@ -179,7 +213,7 @@ export default function InventoryPage() {
       </div>
 
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold tracking-tight">Inventory</h2>
+        <h2 className="text-3xl font-bold tracking-tight">Materials</h2>
         <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
           <DialogTrigger asChild>
             <Button className="bg-[#20214F]">
@@ -199,6 +233,12 @@ export default function InventoryPage() {
               const newMaterial = Object.fromEntries(formData)
               if (selectedCategory === 'new') {
                 newMaterial.category = newCategory
+              }
+              if (selectedUnit === 'new') {
+                newMaterial.unit = newUnit
+              }
+              if (selectedSupplier === 'new') {
+                newMaterial.supplier = newSupplier
               }
               addMaterial(newMaterial)
             }}>
@@ -282,8 +322,31 @@ export default function InventoryPage() {
                   <Label htmlFor="unit" className="text-right">
                     Unit
                   </Label>
-                  <Input id="unit" name="unit" className="col-span-3" />
+                  <Select name="unit" onValueChange={handleUnitChange} value={selectedUnit}>
+                    <SelectTrigger className="col-span-3">
+                      <SelectValue placeholder="Select a unit" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {units.map((unit) => (
+                        <SelectItem key={unit} value={unit}>{unit}</SelectItem>
+                      ))}
+                      <SelectItem value="new">Create new unit</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
+                {selectedUnit === 'new' && (
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="newUnit" className="text-right">
+                      New Unit
+                    </Label>
+                    <Input
+                      id="newUnit"
+                      value={newUnit}
+                      onChange={(e) => setNewUnit(e.target.value)}
+                      className="col-span-3"
+                    />
+                  </div>
+                )}
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="buyingPrice" className="text-right">
                     Buying Price
@@ -300,8 +363,31 @@ export default function InventoryPage() {
                   <Label htmlFor="supplier" className="text-right">
                     Supplier
                   </Label>
-                  <Input id="supplier" name="supplier" className="col-span-3" />
+                  <Select name="supplier" onValueChange={handleSupplierChange} value={selectedSupplier}>
+                    <SelectTrigger className="col-span-3">
+                      <SelectValue placeholder="Select a supplier" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {suppliers.map((supplier) => (
+                        <SelectItem key={supplier} value={supplier}>{supplier}</SelectItem>
+                      ))}
+                      <SelectItem value="new">Create new supplier</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
+                {selectedSupplier === 'new' && (
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="newSupplier" className="text-right">
+                      New Supplier
+                    </Label>
+                    <Input
+                      id="newSupplier"
+                      value={newSupplier}
+                      onChange={(e) => setNewSupplier(e.target.value)}
+                      className="col-span-3"
+                    />
+                  </div>
+                )}
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="buyLink" className="text-right">
                     Buy Link
@@ -325,10 +411,7 @@ export default function InventoryPage() {
               <TableHead>Name</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Quantity</TableHead>
-              <TableHead>Buying Price</TableHead>
               <TableHead>Threshold</TableHead>
-              <TableHead>Supplier</TableHead>
-              <TableHead>Status</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -354,35 +437,15 @@ export default function InventoryPage() {
                     <Input
                       type="number"
                       value={material.quantity}
-                      onChange={(e) => updateQuantity(material.id,   parseInt(e.target.value, 10))}
-                      className="w-20 text-center"
+                      onChange={(e) => updateQuantity(material.id, parseInt(e.target.value, 10))}
+                      className={`w-20 text-center ${material.quantity < material.threshold ? 'text-red-500' : ''}`}
                     />
                     <Button variant="outline" size="icon" onClick={() => updateQuantity(material.id, material.quantity + 1)}>
                       <Plus className="h-4 w-4" />
                     </Button>
                   </div>
-                  {material.unit}
                 </TableCell>
-                <TableCell>
-                  ${typeof material.buyingPrice === 'number' 
-                    ? material.buyingPrice.toFixed(2) 
-                    : Number(material.buyingPrice).toFixed(2)}
-                </TableCell>
-                <TableCell>{material.threshold} {material.unit}</TableCell>
-                <TableCell>
-                  <a href={material.buyLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                    {material.supplier}
-                  </a>
-                </TableCell>
-                <TableCell>
-                  <span className={`px-2 py-1 rounded-full text-xs ${
-                    material.status === 'In-stock' ? 'bg-green-100 text-green-800' : 
-                    material.status === 'Low stock' ? 'bg-yellow-100 text-yellow-800' : 
-                    'bg-red-100 text-red-800'
-                  }`}>
-                    {material.status}
-                  </span>
-                </TableCell>
+                <TableCell>{material.threshold}</TableCell>
                 <TableCell className="text-right">
                   <Button variant="ghost" size="icon" onClick={() => openEditModal(material)}>
                     <Pencil className="h-4 w-4" />
