@@ -71,6 +71,7 @@ export default function InventoryPage() {
   const [selectedSupplier, setSelectedSupplier] = useState('')
   const [selectedImage, setSelectedImage] = useState(null)
   const fileInputRef = useRef(null)
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' })
 
   const addMaterial = (newMaterial) => {
     setMaterials([...materials, { 
@@ -161,6 +162,35 @@ export default function InventoryPage() {
     setSelectedCategory(material.category)
     setSelectedImage(material.image)
     setIsEditModalOpen(true)
+  }
+
+  const sortedMaterials = [...materials].sort((a, b) => {
+    if (sortConfig.key) {
+      const aValue = a[sortConfig.key]
+      const bValue = b[sortConfig.key]
+      if (aValue < bValue) {
+        return sortConfig.direction === 'ascending' ? -1 : 1
+      }
+      if (aValue > bValue) {
+        return sortConfig.direction === 'ascending' ? 1 : -1
+      }
+    }
+    return 0
+  })
+
+  const requestSort = (key) => {
+    let direction = 'ascending'
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending'
+    }
+    setSortConfig({ key, direction })
+  }
+
+  const getSortArrow = (key) => {
+    if (sortConfig.key === key) {
+      return sortConfig.direction === 'ascending' ? '↑' : '↓'
+    }
+    return ''
   }
 
   return (
@@ -408,15 +438,31 @@ export default function InventoryPage() {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Image</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Quantity</TableHead>
-              <TableHead>Threshold</TableHead>
+              <TableHead>
+                <button onClick={() => requestSort('name')}>
+                  Name {getSortArrow('name')}
+                </button>
+              </TableHead>
+              <TableHead>
+                <button onClick={() => requestSort('category')}>
+                  Category {getSortArrow('category')}
+                </button>
+              </TableHead>
+              <TableHead>
+                <button onClick={() => requestSort('quantity')}>
+                  Quantity {getSortArrow('quantity')}
+                </button>
+              </TableHead>
+              <TableHead>
+                <button onClick={() => requestSort('threshold')}>
+                  Threshold {getSortArrow('threshold')}
+                </button>
+              </TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {materials.map((material) => (
+            {sortedMaterials.map((material) => (
               <TableRow key={material.id}>
                 <TableCell>
                   <Image
@@ -427,7 +473,11 @@ export default function InventoryPage() {
                     className="rounded-md object-cover"
                   />
                 </TableCell>
-                <TableCell className="font-medium">{material.name}</TableCell>
+                <TableCell className="font-medium">
+                  <a href={material.buyLink} target="_blank" rel="noopener noreferrer">
+                    {material.name}
+                  </a>
+                </TableCell>
                 <TableCell>{material.category}</TableCell>
                 <TableCell>
                   <div className="flex items-center space-x-2">
