@@ -19,7 +19,7 @@ export function LayoutComponent({ children }: { children: React.ReactNode }) {
       >
         <nav>
           <ul className="space-y-2">
-            {["'Dashboard'", "'Inventory'", "'Products'", "'Orders'", "'To-Do'", "'Queue'"].map((item) => (
+            {["Dashboard", "Inventory", "Products", "Orders", "To-Do", "Queue"].map((item) => (
               <li key={item}>
                 <Link
                   href={`/${item.toLowerCase()}`}

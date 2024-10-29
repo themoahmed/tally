@@ -53,7 +53,7 @@ const monthlyData = [
   { name: 'Jun', value: 5500 },
 ]
 
-export default function HomePage() {
+export default function Dashboard() {
   const [chartData] = useState(monthlyData)
 
   return (
