@@ -186,13 +186,6 @@ export default function InventoryPage() {
     setSortConfig({ key, direction })
   }
 
-  const getSortArrow = (key) => {
-    if (sortConfig.key === key) {
-      return sortConfig.direction === 'ascending' ? '↑' : '↓'
-    }
-    return ''
-  }
-
   return (
     <div className="space-y-6 p-8">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -439,24 +432,16 @@ export default function InventoryPage() {
             <TableRow>
               <TableHead className="w-[100px]">Image</TableHead>
               <TableHead>
-                <button onClick={() => requestSort('name')}>
-                  Name {getSortArrow('name')}
-                </button>
+                <button onClick={() => requestSort('name')}>Name</button>
               </TableHead>
               <TableHead>
-                <button onClick={() => requestSort('category')}>
-                  Category {getSortArrow('category')}
-                </button>
+                <button onClick={() => requestSort('category')}>Category</button>
               </TableHead>
               <TableHead>
-                <button onClick={() => requestSort('quantity')}>
-                  Quantity {getSortArrow('quantity')}
-                </button>
+                <button onClick={() => requestSort('quantity')}>Quantity</button>
               </TableHead>
               <TableHead>
-                <button onClick={() => requestSort('threshold')}>
-                  Threshold {getSortArrow('threshold')}
-                </button>
+                <button onClick={() => requestSort('threshold')}>Threshold</button>
               </TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
