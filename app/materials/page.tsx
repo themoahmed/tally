@@ -473,7 +473,7 @@ export default function InventoryPage() {
                       type="number"
                       value={material.quantity}
                       onChange={(e) => updateQuantity(material.id, parseInt(e.target.value, 10))}
-                      className={`w-20 text-center ${material.quantity < material.threshold ? 'text-red-500' : ''}`}
+                      className={`w-20 text-center ${material.quantity < material.threshold ? 'bg-yellow-300' : ''} ${material.quantity === 0 ? 'bg-red-500' : ''}`}
                     />
                     <Button variant="outline" size="icon" onClick={() => updateQuantity(material.id, material.quantity + 1)}>
                       <Plus className="h-4 w-4" />

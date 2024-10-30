@@ -61,19 +61,19 @@ const categories = ['T-Shirts', 'Hoodies', 'Mugs', 'Posters', 'Other']
 const sampleProducts: Product[] = [
   {
     id: '1',
-    title: 'Classic T-Shirt',
-    description: 'A comfortable, casual fit t-shirt',
+    title: 'USC Swoosh Design',
+    description: 'Embroidered Swoosh Design',
     category: 'T-Shirts',
     variants: [
       { name: 'Small', price: 19.99, buffer: 10, supplies: [{ name: 'Fabric', quantity: 1 }] },
       { name: 'Medium', price: 19.99, buffer: 15, supplies: [{ name: 'Fabric', quantity: 1.2 }] },
       { name: 'Large', price: 21.99, buffer: 12, supplies: [{ name: 'Fabric', quantity: 1.4 }] },
     ],
-    images: ['/placeholder.svg?height=200&width=200'],
+    images: ['/images/swoosh4.png'],
   },
   {
     id: '2',
-    title: 'Hoodie',
+    title: 'I <3 Tommy Trojan Shirt',
     description: 'Warm and cozy hoodie for cold days',
     category: 'Hoodies',
     variants: [
@@ -81,7 +81,7 @@ const sampleProducts: Product[] = [
       { name: 'Medium', price: 39.99, buffer: 10, supplies: [{ name: 'Fabric', quantity: 2.2 }] },
       { name: 'Large', price: 42.99, buffer: 8, supplies: [{ name: 'Fabric', quantity: 2.4 }] },
     ],
-    images: ['/placeholder.svg?height=200&width=200'],
+    images: ['/images/uscmoms.jpg'],
   },
 ]
 
