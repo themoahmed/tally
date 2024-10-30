@@ -41,6 +41,7 @@ export default function RootLayout({
       } md:block`}
     >
       <nav>
+        <img src="/images/tallyLogo.png" alt="Logo" className="w-3/5 h-3/5 mx-auto mb-8" />
         <ul className="space-y-2">
           {["Dashboard", "Materials", "Products", "Orders", "To-do", "Queue"].map((item) => (
             <li key={item}>
