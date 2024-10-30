@@ -73,7 +73,7 @@ const sampleProducts: Product[] = [
   },
   {
     id: '2',
-    title: 'I <3 Tommy Trojan Shirt',
+    title: 'I <3 USC moms',
     description: 'Warm and cozy hoodie for cold days',
     category: 'Hoodies',
     variants: [

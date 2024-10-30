@@ -28,16 +28,16 @@ export default function TodoPage() {
   const [productsNeeded, setProductsNeeded] = useState<ProductNeeded>({})
 
   const sampleOrders: Order[] = [
-    { name: "I <3 Tommy Trojan Shirt", variant: "Gildan H000 Black S", qty: 10, price: 25.00, date: "2024-10-28" },
-    { name: "I <3 Tommy Trojan Shirt", variant: "Gildan H000 Black M", qty: 5, price: 45.00, date: "2024-10-26" },
-    { name: "I <3 Tommy Trojan Shirt", variant: "Gildan H000 Black L", qty: 8, price: 30.00, date: "2024-10-29" },
+    { name: "I <3 USC moms", variant: "Gildan H000 Black S", qty: 10, price: 25.00, date: "2024-10-28" },
+    { name: "I <3 USC moms", variant: "Gildan H000 Black M", qty: 5, price: 45.00, date: "2024-10-26" },
+    { name: "I <3 USC moms", variant: "Gildan H000 Black L", qty: 8, price: 30.00, date: "2024-10-29" },
     { name: "USC Swoosh Design", variant: "Gildan H000 Black S", qty: 12, price: 25.00, date: "2024-10-28" },
     { name: "USC Swoosh Design", variant: "Gildan H000 Black M", qty: 7, price: 45.00, date: "2024-10-26" },
     { name: "USC Swoosh Design", variant: "Gildan H000 White L", qty: 8, price: 30.00, date: "2024-10-29" },
-    { name: "I <3 Tommy Trojan Shirt", variant: "Gildan H000 Red XL", qty: 15, price: 35.00, date: "2024-10-30" },
+    { name: "I <3 USC moms", variant: "Gildan H000 Red XL", qty: 15, price: 35.00, date: "2024-10-30" },
     { name: "USC Swoosh Design", variant: "Gildan H000 Red L", qty: 10, price: 35.00, date: "2024-10-30" },
     { name: "USC Swoosh Design", variant: "Gildan H000 Blue M", qty: 20, price: 28.00, date: "2024-10-31" },
-    { name: "I <3 Tommy Trojan Shirt", variant: "Gildan H000 Blue S", qty: 18, price: 28.00, date: "2024-10-31" },
+    { name: "I <3 USC moms", variant: "Gildan H000 Blue S", qty: 18, price: 28.00, date: "2024-10-31" },
   ]
 
   useEffect(() => {
