@@ -38,10 +38,10 @@ const inventorySummary = {
 }
 
 const recentActivities = [
-  { id: 1, action: 'Added new material', material: 'Cotton Fabric', quantity: 500, date: '2023-10-28' },
-  { id: 2, action: 'Updated stock', material: 'Buttons', quantity: -200, date: '2023-10-27' },
-  { id: 3, action: 'Removed material', material: 'Zipper', quantity: 0, date: '2023-10-26' },
-  { id: 4, action: 'Added new material', material: 'Denim', quantity: 300, date: '2023-10-25' },
+  { id: 1, action: 'Added new material', material: 'Gildan G180 Black Small', quantity: 50, date: '2023-10-28' },
+  { id: 2, action: 'Updated stock', material: 'Gildan G180 Black Medium', quantity: 20, date: '2023-10-27' },
+  { id: 3, action: 'Removed material', material: 'Gildan G180 Black Large', quantity: 7, date: '2023-10-26' },
+  { id: 4, action: 'Added new material', material: 'Lane Seven Shirts', quantity: 30, date: '2023-10-25' },
 ]
 
 const monthlyData = [
@@ -67,6 +67,7 @@ export default function Dashboard() {
             <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
+
             <div className="text-2xl font-bold">{inventorySummary.totalMaterials}</div>
             <p className="text-xs text-muted-foreground">items in inventory</p>
           </CardContent>
