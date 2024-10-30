@@ -23,11 +23,12 @@ type Material = {
 }
 
 const sampleMaterials: Material[] = [
-  { name: "Black Fabric", qty: 5, threshold: 10, lastUpdated: "2024-10-28" },
-  { name: "White Fabric", qty: 8, threshold: 15, lastUpdated: "2024-10-26" },
-  { name: "Red Fabric", qty: 0, threshold: 20, lastUpdated: "2024-10-29" },
-  { name: "Blue Fabric", qty: 3, threshold: 10, lastUpdated: "2024-10-30" },
-  { name: "Green Fabric", qty: 7, threshold: 15, lastUpdated: "2024-10-31" },
+  { name: "Gildan H000 White M", qty: 5, threshold: 10, lastUpdated: "2024-10-28" },
+  { name: "Gildan H000 Navy L", qty: 8, threshold: 15, lastUpdated: "2024-10-26" },
+  { name: "Gildan H000 Black M", qty: 5, threshold: 15, lastUpdated: "2024-10-26" },
+  { name: "Gildan H000 Black S", qty: 0, threshold: 20, lastUpdated: "2024-10-29" },
+  { name: "Gildan H000 Heather Grey M", qty: 3, threshold: 10, lastUpdated: "2024-10-30" },
+  { name: "Gildan H000 Maroon L", qty: 7, threshold: 15, lastUpdated: "2024-10-31" },
 ]
 
 export default function QueuePage() {
